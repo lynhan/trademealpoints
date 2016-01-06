@@ -1,0 +1,90 @@
+<!-- 
+buy.html
+buy page
+show current offers
+-->
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- navbar -->
+<div class = "navbar">
+    <a class = "current_link"  href = "/buy">BUY</a>
+    <a class = "navlinks" href = "/sell">SELL</a>
+    <a class = "navlinks" href = "/faq">F.A.Q</a>
+</div>
+
+
+<!-- offers -->
+<div class = "center">
+
+    {%if count == 0%}       <!-- no available offers -->
+    <div class = 'spaceup'>Nothing on the market right now! <br>Check back later. :)</div>
+
+
+    {%else%}       <!-- render offers -->
+    <div class = "spacing200 tenbelow">
+
+
+        <!-- label bar -->
+        <div class = "theader">
+
+            <a id = "sortmp" class = "sort" current = "false">
+                <span>
+                    <div class="filler"></div>
+                    MP
+                    <div class="ascend ascendwhite triangle"></div>
+                </span>
+            </a>
+
+            <a id = "sortcost" class = "sort" current = "false">
+                <span>
+                    <div class="filler"></div>
+                    $
+                    <div class="ascend ascendwhite triangle"></div>
+                </span>
+            </a>
+
+            <a id = "sortprice" class = "sort" data = "normalsorted" current = "true">
+                <span>
+                    <div class="smallfiller"></div>
+                    $/MP
+                    <div class="ascend triangle"></div>
+                </span>
+            </a>
+        </div>
+
+
+        <!-- offers -->
+        <div id = 'entrytable'>
+            {% for x in range(0, count) %}
+
+                <!-- highlight your own offer -->
+                {% if offers[x].user.email == email %}
+                <a class = "entrylink mylink" href="/contact?amount={{offers[x].amount}}&price={{offers[x].price}}&id={{offers[x].key().id()}}">
+
+                <!-- normal color -->
+                {%else%}
+                <a class = "entrylink" href="/contact?amount={{offers[x].amount}}&price={{offers[x].price}}&id={{offers[x].key().id()}}">
+                
+                {%endif%} 
+
+                    <span class = "entry amount">{{offers[x].amount}}</span>
+                    <span class = "entry cost">{{offers[x].amount|int*offers[x].price|float}}</span>
+                    <span class = "entry price">{{offers[x].price}}</span>
+                    <br>
+                </a>
+
+            {% endfor %}
+        </div>
+
+
+        <!-- link to edit -->
+        <a class = "text_link " href = "/changeoffer">edit my offer</a></span><span style = "color:#c7c7c7;">
+        <div style = "height:80px;"></div>
+
+    {%endif%}
+
+    </div>
+    {% endblock %}

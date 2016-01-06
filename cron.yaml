@@ -1,0 +1,4 @@
+cron:
+- description: unsold meal point reminder
+  url: /unsoldreminder
+  schedule: every monday 09:00

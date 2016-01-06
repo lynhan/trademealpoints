@@ -1,0 +1,40 @@
+# runtime config
+
+application: trademealpoints
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+# stuff after line with - 
+# must be indented right
+
+- url: /css
+  static_dir: css
+
+- url: /png
+  static_dir: png
+
+- url: /javascript
+  static_dir: javascript
+
+- url: /_ah/mail/.+
+  script: handle_incoming_email.app
+  login: admin
+
+# app is name of instance of WSGIApplication
+
+- url: /.*
+  script: trademealpoints.app
+  secure: always
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+
+inbound_services:
+- mail

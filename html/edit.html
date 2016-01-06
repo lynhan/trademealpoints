@@ -1,0 +1,40 @@
+<!-- 
+edit.html
+edit page
+input email for link
+to edit own offers
+-->
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- navbar -->
+<div class = "navbar">
+    <a class = "navlinks" href = "/buy">BUY</a>
+    <a class = "current_link" href = "/sell">SELL</a>
+    <a class = "navlinks" href = "/faq">F.A.Q</a>
+</div>
+
+
+<!-- input email -->
+<form method = "post" class = "center">
+
+    <!-- edit offer label -->
+    <h2 style = "text-align:center;font-size:20px;margin-bottom:20px;">EDIT OFFER</h2>
+
+    <!-- email input  -->
+    <div>
+        <img src = "/png/email.png" id = "expirepic" class = "icon" width="27px">
+        <input type="text" placeholder = "wustl email" name="email" value="{{email}}">
+    </div>
+    
+    <!-- submit button -->
+    <input type="submit" class = "button spaceup" value="send me the link">
+
+    <!-- processing status -->
+    <div class="stat">{{stat}}</div>
+    
+</form>
+
+{% endblock %}

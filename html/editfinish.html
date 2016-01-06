@@ -1,0 +1,79 @@
+<!-- 
+editfinish.html
+edit personal offers
+-->
+
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- navbar -->
+<div class = "navbar">
+    <a class = "navlinks" href = "/buy">BUY</a>
+    <a class = "current_link" href = "/sell">SELL</a>
+    <a class = "navlinks" href = "/faq">F.A.Q</a>
+</div>
+
+
+<!-- edit offers section -->
+<form method="post" class = "center animated fadeIn">
+
+    <!-- show my offer label  -->
+
+    <!-- no offers -->
+    {%if offer|length == 0%}
+
+        <h2 style = "text-align:center;font-size:20px;margin-bottom:10px;color:grey;">
+            You don't have anything on the market!
+            <a href = "/sell">Sell?</a>
+        </h2>
+
+    <!-- one offer -->
+    {%elif offer|length == 1%} 
+
+    <h2 style = "text-align:center;font-size:20px;margin-bottom:10px;">MY OFFER</h2>
+
+    <!-- multiple offers -->
+    {%else%}
+
+    <h2 style = "text-align:center;font-size:20px;margin-bottom:10px;">MY OFFERS</h2>
+
+    {%endif%}
+
+
+
+    <!-- render offers -->
+    {%if offer|length != 0%}
+
+        <!-- render each offer with current val in input box -->
+        {% for offer in offer%}
+
+            <div>
+                <!-- amount -->
+                <input type="text" class = "myamount changeinput" name="amount" value="{{offer.amount}}"> 
+                <span>MEAL POINTS AT</span>
+
+                <!-- price -->
+                <input type="text" class = "myprice changeinput" name="price" value="{{offer.price}}"> 
+                <span>PER POINT</span>
+
+                <!-- delete button-->
+                <button type="button" class = "deletebutton">x</button>
+            </div>
+    
+        {% endfor %}
+
+        <!-- submit button -->
+        <div>
+            <input type="submit" id = "edit_button" class = "button spaceup" value="update" name = "edit_button">
+        </div>
+
+        <!-- status -->
+        <div id="editstat" class = "spaceup stat">{{editstat}}</div><br><br>
+    
+    {%endif%}
+    
+</form>
+
+{% endblock %}

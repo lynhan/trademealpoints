@@ -1,0 +1,80 @@
+<!-- 
+newbuy.html
+confirm buy 
+show offer deets
+-->
+
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- navbar -->
+<div class = "navbar">
+    <a class = "current_link"  href = "/buy">BUY</a>
+    <a class = "navlinks" href = "/sell">SELL</a>
+    <a class = "navlinks" href = "/faq">F.A.Q</a>
+</div>
+
+
+<!-- main content -->
+<form method="post" class = "center animated fadeIn">
+    
+    <div class = "newbuy">
+
+        <!-- offer info -->
+        <div class = "spaceup">
+            BUY <span style = "color:#4ab8ca;" class = "amount">{{amount}}</span> MEAL POINTS
+        </div>
+        
+        <div>
+            AT <span style = "color:#4ab8ca;">$</span><span style = "color:#4ab8ca;" class = "price" >{{price}}</span> PER POINT
+        </div>
+        
+        <div class = "tenbelow">
+            FOR <span style = "color:#4ab8ca;">$</span><span style = "color:#4ab8ca;" class = "cost">{{amount|int*price|float}}</span>
+        </div>
+
+
+        <!-- email input -->
+        <div>
+            <img src = "/png/email.png" id = "emailpic" class = "icon" width="30px">
+            <input type="text" placeholder = "wustl email" class = "tenbelow emailinput" name="email" value="{{email}}">
+        </div>  
+        
+        <!-- user not in db -->
+        {%if need_code%} 
+            <!-- first name -->
+            <div>
+                <img src = "/png/first.png" id = "sellfirst" class = "sellicon" width="30px">
+                <input type="text" placeholder = "first name" name="first_name" value="{{first_name}}">
+            </div>
+
+
+            <!-- last name -->
+            <div>
+                 <img src = "/png/last.png" id = "selllast" class = "sellicon" width="30px">
+                <input type="text" placeholder = "last name"   name="last_name" value="{{last_name}}">
+            </div>
+
+
+            <!-- verify code from email-->
+            <div>
+                <img src = "/png/cvc.png" id = "sellverify" class = "sellicon" width="30px">
+                <input type="text" placeholder = "verification code"  name="code" value="{{code}}">
+            </div>
+            
+            <button type="submit" name = "resend_button" class = "button spaceup resend_button" value = "resend code">resend code</button>
+        {%endif%}
+
+        <!-- submit -->
+        <button type="submit"  name = "submit_button" class = "button spaceup" value="contact seller">contact seller</button>
+
+    </div>
+    
+    <!-- status -->
+    <div class = "stat">{{stat}}</div>
+    
+</form>
+
+{% endblock %}
